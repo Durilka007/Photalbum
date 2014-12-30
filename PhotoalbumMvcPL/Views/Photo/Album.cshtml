@@ -1,0 +1,100 @@
+﻿ @model IEnumerable<PhotoalbumMvcPL.ViewModels.PhotoViewModel>
+@{
+    ViewBag.Title = "Photoes";
+}
+
+<h2>Album</h2>
+@using (Html.BeginForm("Album", "Photo",
+    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @*Для загрузки изображений*@
+   <div class="editor-field">
+        Загрузить фото:
+        <input type="file" name="Image" />
+    </div>
+    <p>
+        <input type="submit" value="Загрузить фото" />
+    </p>
+
+}
+
+
+<table class="photo-table">
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            if (i % 4 == 0)
+            {
+                if (item.ImagePhotoe != null)
+                {
+                    <div style="float: left; margin-right: 20px">
+                        <img width="75" height="75" src="@Url.Action("GetImage", "Photo", new { photoId = item.Id })" />
+                    </div>
+                }
+            }
+
+        }
+
+    }
+</table> 
+<table class="photo-table">
+    @{
+        int j = 0;
+        foreach (var item in Model)
+        {
+            if (j % 4 == 0)
+            {
+                if (item.ImagePhotoe != null)
+                {
+                    <div style="float: left; margin-right: 20px">
+                        <img width="75" height="75" src="@Url.Action("GetImage", "Photo", new { photoId = item.Id })" />
+                    </div>
+                }
+            }
+
+        }
+
+    }
+</table>       
+<table class="photo-table">
+    @{
+        int k = 0;
+        foreach (var item in Model)
+        {
+            if (k % 4 == 0)
+            {
+                if (item.ImagePhotoe != null)
+                {
+                    <div style="float: left; margin-right: 20px">
+                        <img width="75" height="75" src="@Url.Action("GetImage", "Photo", new { photoId = item.Id })" />
+                    </div>
+                }
+            }
+
+        }
+
+    }
+</table>       
+<table class="photo-table">
+    @{
+        int l = 0;
+        foreach (var item in Model)
+        {
+            if (l % 4 == 0)
+            {
+                if (item.ImagePhotoe != null)
+                {
+                    <div style="float: left; margin-right: 20px">
+                        <img width="75" height="75" src="@Url.Action("GetImage", "Photo", new { photoId = item.Id })" />
+                    </div>
+                }
+            }
+
+        }
+
+    }
+</table>             
+    
+
+       

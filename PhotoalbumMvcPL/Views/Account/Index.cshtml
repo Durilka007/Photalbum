@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PhotoalbumMvcPL.ViewModels.UserViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Зарегистрированные пользователи</h2>
+
+<table>
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.UserPhotoe)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @if (HttpContext.Current.User.IsInRole("admin"))
+            {
+                @Html.DisplayNameFor(model => model.Email)
+            }
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.UserPhotoe != null)
+            {
+                <div style="float: left; margin-right: 20px">
+                    @*@Html.Raw("<img style='width:75px; height:75px;' src=\"data:"+item.UserPhotoMimeType+";base64,"
+                    + Convert.ToBase64String(item.UserPhotoe) + "\" />")*@@*+++!!!!работает со страшным кодом для картинок на странице в коде*@
+                    @*<img width="75" height="75" src="/Account/GetImage/?userId=@item.Id" />*@
+                    <img width="75" height="75" src="@Url.Action("GetImage", "Account", new {userId= item.Id })" />
+                </div>
+            }
+        </td>
+        <td>
+            @Html.ActionLink(item.UserName, "Albums", "Profile", new { userId = item.Id }, null)
+            @*@Html.DisplayFor(modelItem => item.UserName)*@
+        </td>
+        <td>
+            @if (HttpContext.Current.User.IsInRole("admin"))
+            {
+                @Html.DisplayFor(modelItem => item.Email)
+            }
+            @*@Html.DisplayFor(modelItem => item.Email)*@
+    </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+       
+        <td>
+            @*<a href="@Url.Action("Delete", "Account" , new {userId=item.Id })">Delete</a>*@@*+++работает тоже!!!!*@
+           
+            @if (HttpContext.Current.User.IsInRole("admin"))
+            {
+                <h3>@Html.ActionLink("Delete user", "Delete", "Account", new { userId = item.Id }, null)</h3>
+            }
+            @*@Html.ActionLink("Delete user", "Delete", "Account", new { userId =item.Id},null)*@
+
+            @*<a href="/Account/Delete/?userId=@item.Id">Delete</a>*@@*+++работает тоже!!!!*@
+           
+    </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PhotoalbumMvcPL.ViewModels.AlbumViewModel>
+
+@{
+    ViewBag.Title = "My albums";
+}
+
+<h2>Albums</h2>
+<table>
+    <tr>
+        <td>
+            @Html.ActionLink("Create new album", "New", "Profile", new { albumName = "New album" }, null)
+
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @*@if (Session["Email"] != null)
+                    {
+                        @Session["Email"].ToString()
+                    }*@
+                @Html.ActionLink("Delete album", "Delete", "Profile", new { albumId = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>
